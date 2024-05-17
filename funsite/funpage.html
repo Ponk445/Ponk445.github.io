@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Haha</title>
+</head>
+<body onload="playVideo()">
+  <video id="video" autoplay loop muted playsinline>
+    <source src="funvid.mp4" type="video/mp4">
+  </video>
+  <button id="fullscreen-button">Go Fullscreen</button>
+</body>
+<script>
+  function playVideo() {
+    var video = document.getElementById('video');
+    video.requestFullscreen();
+  }
+
+  // Add an event listener to the button
+  document.getElementById('fullscreen-button').addEventListener('click', function() {
+    var video = document.getElementById('video');
+    video.requestFullscreen();
+  });
+</script>
+</html>

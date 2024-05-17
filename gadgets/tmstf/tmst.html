@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Stopwatch and Timer</title>
+</head>
+<body>
+	<div class="container">
+		<div class="stopwatch">
+			<h1><span class="gold"></span> STOPWATCH</h1>
+			<div class="circle">
+				<span class="time" id="display">00:00:00</span>
+			</div>
+			<button id="playButton">Play</button>
+			<button id="pauseButton" style="display: none;">Pause</button>
+			<button id="resetButton">Reset</button>
+		</div>
+		<div class="timer">
+			<h1><span class="gold"></span> TIMER</h1>
+			<input type="text" id="timeInput" placeholder="Enter time in seconds">
+			<button id="startButton">Start</button>
+			<button id="stopButton" style="display: none;">Stop</button>
+			<button id="resetButtonTimer">Reset</button>
+			<div class="timeLeft" id="timeLeft">00:00</div>
+		</div>
+	</div>
+	<audio id="timeEndedSound" src="timeendedsnd.mp3" preload="auto"></audio>
+	<script src="tmstsc.js"></script>
+</body>
+</html>

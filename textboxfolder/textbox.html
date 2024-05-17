@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Notes</title>
+    <style>
+      /* Set the width and height of the textarea and make it unresizable */
+      #notes {
+        width: 80%;
+        height: 60%;
+        resize: none; /* Add this to make the textarea unresizable */
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+
+      /* Set the container to wrap the buttons and div */
+     .container {
+        position: fixed;
+        top: 60%; /* Start from the bottom of the textarea */
+        left: 0;
+        width: 80%; /* Match the width of the textarea */
+      }
+
+      /* Style the buttons and div */
+     .container button,.container.sayitsaves {
+        margin: 10px;
+      }
+
+      /* Set the width and height of the body to 100% so the textarea can take up the desired percentage of the screen */
+      body {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Textarea for taking notes -->
+    <textarea id="notes"></textarea>
+    <!-- Container to wrap the buttons and div -->
+    <div class="container">
+      <!-- Button to save the notes -->
+      <button id="save">Save</button>
+      <!-- Button to delete the notes -->
+      <button id="delete">Delete</button>
+      <!-- Button to download the saved notes as a text file -->
+      <button id="saveTextFile">Save as Text File</button>
+      <!-- Button to download the saved notes as a PDF file -->
+      <button id="savePdfFile">Save as PDF File</button>
+      <div class="sayitsaves">Dont worry, the text is saved in the cache when you click the save button.
+        Delete from cache and here by clicking the delete button.</div>
+    </div>
+    <!-- Script for handling user interactions -->
+    <script src="notes.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+  </body>
+</html>
