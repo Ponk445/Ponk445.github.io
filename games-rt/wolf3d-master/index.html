@@ -1,0 +1,413 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-store" />
+    <meta name="viewport" content="width=640, height=400, user-scalable=no">
+    <link rel="shortcut icon" href="favicon.png" />
+	<title>Wolfenstein 3D</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="js/modernizr.custom.js"></script>
+    <script src="js/jquery-1.7.1.min.js"></script>
+    <script src="js/load.js"></script>
+
+</head>
+<body>
+
+<div id="main">
+    <div id="title-screen"></div>
+    
+    <div id="menu">
+        <div class="message confirm-newgame">
+            <div class="box"></div>
+        </div>
+
+        <div class="menu main">
+            <ul class="selector">
+                <li data-submenu="episodes" class="newgame"><div class="button"></div></li>
+                <li data-submenu="sound" class="sound"><div class="button"></div></li>
+                <li data-submenu="control" class="control"><div class="button"></div></li>
+                <li class="readthis"><div class="button"></div></li>
+                <li class="resumegame"><div class="button"></div></li>
+            </ul>
+        </div>
+        
+        <div class="menu sound" data-backmenu="main">
+            <ul class="selector">
+                <li class="sfxon"><div class="button"><div class="light"></div></div></li>
+                <li class="sfxoff"><div class="button"><div class="light"></div></div></li>
+                <li class="musicon"><div class="button"><div class="light"></div></div></li>
+                <li class="musicoff"><div class="button"><div class="light"></div></div></li>
+            </ul>
+        </div>
+        
+        <div class="menu control" data-backmenu="main">
+            <ul class="selector">
+                <li class="mouseenabled"><div class="button"><div class="light"></div></div></li>
+                <li data-submenu="customize" class="customize"><div class="button"></div></li>
+            </ul>
+        </div>
+        
+        <div class="menu customize" data-backmenu="control">
+            <ul class="selector">
+                <li class="customizekeys line1"><div class="button">
+                    <span class="k1 run" data-action="run"></span>
+                    <span class="k2 use" data-action="use"></span>
+                    <span class="k3 attack" data-action="attack"></span>
+                    <span class="k4 strafe" data-action="strafe"></span>
+                </div></li>
+                <li class="customizekeys line1"><div class="button">
+                    <span class="k1 left" data-action="left"></span>
+                    <span class="k2 right" data-action="right"></span>
+                    <span class="k3 up" data-action="up"></span>
+                    <span class="k4 down" data-action="down"></span>
+                </div></li>
+            </ul>
+        </div>
+        
+        <div class="menu skill" data-backmenu="episodes">
+            <div class="face"></div>
+            <ul class="selector">
+                <li data-submenu="levels" data-skill="gd_baby" class="baby"><div class="button"></div></li>
+                <li data-submenu="levels" data-skill="gd_easy" class="easy"><div class="button"></div></li>
+                <li data-submenu="levels" data-skill="gd_medium" class="medium"><div class="button"></div></li>
+                <li data-submenu="levels" data-skill="gd_hard" class="hard"><div class="button"></div></li>
+            </ul>
+        </div>
+        
+        <div class="menu episodes" data-backmenu="main">
+            <ul>
+                <li data-episode="0" class="episode-0"><div class="button"></div></li>
+                <li data-episode="1" class="episode-1"><div class="button"></div></li>
+                <li data-episode="2" class="episode-2"><div class="button"></div></li>
+            </ul>
+        </div>
+
+        <div class="menu levels" data-backmenu="skill">
+            <ul class="two-column selector">
+                <li data-level="0" class="level-0"><div class="button"></div></li>
+                <li data-level="1" class="level-1"><div class="button"></div></li>
+                <li data-level="2" class="level-2"><div class="button"></div></li>
+                <li data-level="3" class="level-3"><div class="button"></div></li>
+                <li data-level="4" class="level-4"><div class="button"></div></li>
+            </ul>
+            <ul class="two-column selector">
+                <li data-level="5" class="level-5"><div class="button"></div></li>
+                <li data-level="6" class="level-6"><div class="button"></div></li>
+                <li data-level="7" class="level-7"><div class="button"></div></li>
+                <li data-level="8" class="level-8"><div class="button"></div></li>
+                <li data-level="9" class="level-9"><div class="button"></div></li>
+            </ul>
+        </div>
+            
+    </div>
+    
+    <div id="text-screen"></div>
+    
+ 
+    <div id="game">
+        <div class="fps"></div>
+        
+        <div class="renderer">
+            <div class="ceiling"></div>
+            <div class="floor"></div>
+            <div class="player-weapon"></div>
+            <div class="damage-flash overlay"></div>
+            <div class="bonus-flash overlay"></div>
+            <div class="death overlay"></div>
+            <div class="pause overlay"><img alt="" src="art/paused.png"/></div>
+        </div>
+        
+        <div class="loading"><img alt="" src="art/getpsyched.png"/></div>
+        
+        <div class="gameover"></div>
+        
+        <div class="intermission">
+            <div class="background"></div>
+            <div class="background-secret"></div>
+            <div class="background-victory"></div>
+            
+            <div class="bj"></div>
+            
+            <div class="floor stat">
+                <div class="digit"></div>
+                <div class="digit"></div>
+            </div>
+            
+            <div class="bonus stat">
+                <div class="digit"></div>
+                <div class="digit"></div>
+                <div class="digit"></div>
+                <div class="digit"></div>
+                <div class="digit"></div>
+                <div class="digit"></div>
+            </div>
+            
+            <div class="total-time-minutes victory-stat">
+                <div class="digit"></div><div class="digit"></div>
+            </div>
+            <div class="total-time-seconds victory-stat">
+                <div class="digit"></div><div class="digit"></div>
+            </div>
+
+            <div class="time-minutes stat">
+                <div class="digit"></div>
+                <div class="digit"></div>
+            </div>
+            <div class="time-seconds stat">
+                <div class="digit"></div>
+                <div class="digit"></div>
+            </div>
+            <div class="par-minutes stat">
+                <div class="digit"></div>
+                <div class="digit"></div>
+            </div>
+            <div class="par-seconds stat">
+                <div class="digit"></div>
+                <div class="digit"></div>
+            </div>
+
+            <div class="kill-ratio stat">
+                <div class="digit"></div>
+                <div class="digit"></div>
+                <div class="digit"></div>
+            </div>
+            <div class="secret-ratio stat">
+                <div class="digit"></div>
+                <div class="digit"></div>
+                <div class="digit"></div>
+            </div>
+            <div class="treasure-ratio stat">
+                <div class="digit"></div>
+                <div class="digit"></div>
+                <div class="digit"></div>
+            </div>
+            
+            <div class="avg-kill-ratio victory-stat">
+                <div class="digit"></div><div class="digit"></div><div class="digit"></div>
+            </div>
+            <div class="avg-secret-ratio victory-stat">
+                <div class="digit"></div><div class="digit"></div><div class="digit"></div>
+            </div>
+            <div class="avg-treasure-ratio victory-stat">
+                <div class="digit"></div><div class="digit"></div><div class="digit"></div>
+            </div>
+        </div>
+       
+        
+        <div class="hud">
+            <div class="floor number-container">
+                <div class="number"></div>
+            </div>
+            <div class="score number-container">
+                <div class="number"></div><div class="number"></div><div class="number"></div><div class="number"></div><div class="number"></div><div class="number"></div>
+            </div>
+            <div class="lives number-container">
+                <div class="number"></div>
+            </div>
+            <div class="health number-container">
+                <div class="number"></div><div class="number"></div><div class="number"></div>
+            </div>
+            <div class="ammo number-container">
+                <div class="number"></div><div class="number"></div>
+            </div>
+            <div class="key1"></div>
+            <div class="key2"></div>
+            <div class="bj"></div>
+            <div class="weapon"></div>
+        </div>
+    </div>
+</div>
+
+<body>
+  <div id="controlsContainer">
+    <div id="joystickContainer">
+      <div id="base"></div>
+      <div id="stick"></div>
+    </div>
+    <button id="openDoorButton">Open Door</button>
+    <button id="shootButton">Shoot</button>
+  </div>
+
+  <style>
+    #controlsContainer {
+  display: flex;
+  justify-content: space-around;
+  position: absolute; /* Position strategically (adjust as needed) */
+  bottom: 20px; /* Place controls at the bottom for better accessibility */
+}
+
+#joystickContainer {
+  /* Adjust joystick size and position as needed */
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+}
+
+#base {
+  width: 100%;
+  height: 100%;
+  background-color: #ccc;
+  border-radius: 50%;
+}
+
+#stick {
+  width: 50%;
+  height: 50%;
+  background-color: #ddd;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center stick within base */
+}
+
+#openDoorButton, #shootButton {
+  font-size: 16px;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #eee; /* Adjust background color */
+  -webkit-user-select: none;
+  user-select: none;
+}
+  </style>
+
+  <script>
+    const joystickContainer = document.getElementById("joystickContainer");
+const base = document.getElementById("base");
+const stick = document.getElementById("stick");
+
+let touchX = null;
+let touchY = null;
+let isMoving = false; // Flag to track joystick movement
+
+joystickContainer.addEventListener("touchstart", function(event) {
+  event.preventDefault();
+  touchX = event.changedTouches[0].clientX;
+  touchY = event.changedTouches[0].clientY;
+
+  // Center the stick on touch
+  const containerRect = joystickContainer.getBoundingClientRect();
+  stick.style.left = touchX - containerRect.left - stick.offsetWidth / 2 + "px";
+  stick.style.top = touchY - containerRect.top - stick.offsetHeight / 2 + "px";
+
+  isMoving = true;
+  simulateArrowKeys(); // Simulate initial key press based on stick position
+});
+
+joystickContainer.addEventListener("touchmove", function(event) {
+  event.preventDefault();
+  const currentTouchX = event.changedTouches[0].clientX;
+  const currentTouchY = event.changedTouches[0].clientY;
+
+  // Calculate movement delta
+  const deltaX = currentTouchX - touchX;
+  const deltaY = currentTouchY - touchY;
+
+  // Limit stick movement within base
+  let newStickX = stick.offsetLeft + deltaX;
+  let newStickY = stick.offsetTop + deltaY;
+
+  const baseRect = base.getBoundingClientRect();
+  const baseWidth = baseRect.width;
+  const baseHeight = baseRect.height;
+  const stickRadius = stick.offsetWidth / 2;
+
+  newStickX = Math.min(Math.max(newStickX, 0), baseWidth - stickRadius * 2);
+  newStickY = Math.min(Math.max(newStickY, 0), baseHeight - stickRadius * 2);
+
+  // Move the stick
+  stick.style.left = newStickX + "px";
+  stick.style.top = newStickY + "px";
+
+  if (isMoving) {
+    simulateArrowKeys(); // Simulate key press based on current stick position
+  }
+});
+
+joystickContainer.addEventListener("touchend", function() {
+  touchX = null;
+  touchY = null;
+  isMoving = false; // Stop simulating arrow key presses on touch end
+
+  // Reset stick position to center
+  stick.style.left = baseWidth / 2 - stickRadius + "px";
+  stick.style.top = baseHeight / 2 - stickRadius + "px";
+
+  simulateArrowKeys("up", false); // Simulate releasing "up" key on touch end
+});
+
+const openDoorButton = document.getElementById("openDoorButton");
+const shootButton = document.getElementById("shootButton");
+
+openDoorButton.addEventListener("touchstart", function() {
+  // Simulate pressing space key on button touch
+  document.dispatchEvent(new KeyboardEvent("keydown", { keyCode: 32 }));
+});
+
+openDoorButton.addEventListener("touchend", function() {
+  // Simulate releasing space key on button touch end
+  document.dispatchEvent(new KeyboardEvent("keyup", { keyCode: 32 }));
+});
+
+shootButton.addEventListener("touchstart", function() {
+  // Simulate pressing X key on button touch
+  document.dispatchEvent(new KeyboardEvent("keydown", { keyCode: 88 }));
+});
+
+shootButton.addEventListener("touchend", function() {
+  // Simulate releasing X key on button touch end
+  document.dispatchEvent(new KeyboardEvent("keyup", { keyCode: 88 }));
+});
+
+function simulateArrowKeys() {
+  const movementAngle = Math.atan2(touchY - stick.offsetTop, touchX - stick.offsetLeft) * 180 / Math.PI;
+  const movementStrength = Math.sqrt((touchX - stick.offsetLeft) * (touchX - stick.offsetLeft) + (touchY - stick.offsetTop) * (touchY - stick.offsetTop)) / (base.offsetWidth / 2);
+
+  let keyCode = null;
+  let isKeyDown = false;
+
+  if (movementStrength <= 0.1) {
+    keyCode = null;
+    isKeyDown = false;
+  } else {
+    if (movementAngle >= 45 && movementAngle < 135) {
+      keyCode = 38; // Up arrow
+      isKeyDown = true;
+    } else if (movementAngle >= 135 && movementAngle < 225) {
+      keyCode = 37; // Left arrow
+      isKeyDown = true;
+    } else if (movementAngle >= 225 && movementAngle < 315) {
+      keyCode = 40; // Down arrow
+      isKeyDown = true;
+    } else if (movementAngle >= 315 || movementAngle < 45) {
+      keyCode = 39; // Right arrow
+      isKeyDown = true;
+    } else if (movementAngle === 0 || movementAngle === 360) {
+      keyCode = 39; // Right arrow
+      isKeyDown = true;
+    } else if (movementAngle === 180) {
+      keyCode = 37;
+    }
+  }
+
+  if (keyCode !== null) {
+    if (isKeyDown) {
+      document.dispatchEvent(new KeyboardEvent("keydown", { keyCode: keyCode }));
+    } else {
+      document.dispatchEvent(new KeyboardEvent("keyup", { keyCode: keyCode }));
+    }
+  }
+}
+  </script>
+
+</body>
+</html>
+
+</body>
+</html>
