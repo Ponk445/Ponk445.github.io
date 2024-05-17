@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Compare Crypto Addresses</title>
+  </head>
+  <body>
+    <h1>Compare Crypto Addresses</h1>
+    <label for="address1">Address 1:</label>
+    <input type="text" id="address1" /><br /><br />
+    <label for="address2">Address 2:</label>
+    <input type="text" id="address2" /><br /><br />
+    <button onclick="compareAddresses()">Compare</button>
+    <p id="result"></p>
+
+    <script>
+      function compareAddresses() {
+        var address1 = document.getElementById("address1").value;
+        var address2 = document.getElementById("address2").value;
+
+        if (address1.toLowerCase() === address2.toLowerCase()) {
+          document.getElementById("result").innerHTML = "The addresses are the same.";
+        } else {
+          document.getElementById("result").innerHTML = "The addresses are different.";
+        }
+      }
+    </script>
+  </body>
+</html>

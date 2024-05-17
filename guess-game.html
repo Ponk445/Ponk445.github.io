@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Guess the Number Game</title>
+  <style>
+    /* Expand the game box and make the textbox bigger */
+
+    input[type="number"] {
+      width: 15%;
+      height: 20px;
+      font-size: 24px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      display: block;
+    }
+    button[type="button"] {
+      width: 100%;
+      height: 50px;
+      font-size: 24px;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: #ffffff;
+      cursor: pointer;
+    }
+    button[type="button"]:hover {
+      background-color: #3e8e41;
+    }
+  </style>
+</head>
+<body>
+  <div class="game">
+    <h1>Guess the Number Game</h1>
+    <p>We have randomly selected a number between 1 and 100. See if you can guess it in 10 turns or fewer!</p>
+    <input type="number" id="guess" min="1" max="100">
+    <button onclick="checkGuess()">Submit Guess</button>
+    <p id="result"></p>
+  </div>
+
+  <script>
+    let numberToGuess = Math.floor(Math.random() * 100) + 1;
+    let guessCount = 0;
+    let lastResult = "";
+
+    function checkGuess() {
+      if (guessCount > 10) {
+        lastResult = "You lost! The number was " + numberToGuess;
+        document.getElementById("result").textContent = lastResult;
+        document.getElementById("guess").disabled = true;
+        return;
+      }
+      let userGuess = document.getElementById("guess").value;
+      if (userGuess < numberToGuess) {
+        lastResult = "Too low!";
+      } else if (userGuess > numberToGuess) {
+        lastResult = "Too high!";
+      } else {
+        lastResult = "Congratulations! You guessed the number in " + guessCount + " turns!";
+        document.getElementById("guess").disabled = true;
+      }
+      guessCount++;
+      document.getElementById("result").textContent = lastResult;
+      document.getElementById("guess").value = "";
+    }
+  </script>
+  <p>for a new game, reload this page</p>
+</body>
+</html>
